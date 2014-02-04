@@ -83,7 +83,9 @@ module Admin::Resources::DataTypes::BelongsToHelper
   def build_add_new_for_belongs_to(klass, options)
     html_options = set_modal_options_for(klass)
     html_options["data-controls-modal"] = "modal-from-dom-#{options[:attribute]}"
-    html_options["url"] = "/admin/#{klass.to_resource}/new?_popup=true"
+
+    subdomain = Typus.subdomain.present? ? "#{Typus.subdomain}/" : ""
+    html_options["url"] = "#{root_url}#{subdomain}#{klass.to_resource}/new?_popup=true"
 
     link_to Typus::I18n.t("Add"), { :anchor => html_options['data-controls-modal'] }, html_options
   end
