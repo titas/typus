@@ -3,6 +3,7 @@
 <ul class="nav pull-right">
   <li class="dropdown" data-dropdown="dropdown">
     <%= link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
+      <%= gravatar_for(admin_user, { size: 20 }) %>
       <%= admin_user.to_label %>
       <b class="caret"></b>
     <% end %>
