@@ -103,7 +103,10 @@ class Admin::ResourcesController < Admin::BaseController
     else
       alert = @item.errors.full_messages
     end
-    redirect_to :back, :notice => notice, :alert => alert
+    respond_to do |format|
+      format.json { render :json => @item }
+      format.html { redirect_to :back, :notice => notice, :alert => alert }
+    end
   end
 
   def toggle
