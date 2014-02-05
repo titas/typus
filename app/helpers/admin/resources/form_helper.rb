@@ -28,6 +28,7 @@ module Admin::Resources::FormHelper
       :end_year => @resource.typus_options_for(:end_year),
       :minute_step => @resource.typus_options_for(:minute_step),
       :include_blank => true,
+      :value => @item.try(attribute),
       :class => 'input-xxlarge',
     }
 
