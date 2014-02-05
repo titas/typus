@@ -36,7 +36,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
            :label_text => label_text.html_safe,
            :values => values,
            :html_options => html_options,
-           :options => { :include_blank => true }
+           :options => { :include_blank => false }
   end
 
   def table_belongs_to_field(attribute, item)
