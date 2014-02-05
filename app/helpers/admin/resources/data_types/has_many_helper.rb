@@ -33,11 +33,8 @@ module Admin::Resources::DataTypes::HasManyHelper
 
   def build_add_new_for_has_many(klass, field, options = {})
     if admin_user.can?("create", klass)
-
       html_options = set_modal_options_for(klass)
-
-      subdomain = Typus.subdomain.present? ? "#{Typus.subdomain}/" : ""
-      html_options["url"] = "#{root_url}#{subdomain}#{klass.to_resource}/new?_popup=true"
+      html_options["url"] = "/#{klass.to_resource}/new?_popup=true"
 
       link_to Typus::I18n.t("Add"), "##{html_options['data-controls-modal']}", html_options
     end
