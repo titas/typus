@@ -13,6 +13,8 @@
 
   <h2><%= Typus::I18n.t("Dashboard") %></h2>
 
+  <%= admin_display_flash_message %>
+
   <% if applications.any? %>
     <% applications.each do |app| %>
 
