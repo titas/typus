@@ -20,7 +20,13 @@ module Admin::Resources::DataTypes::StringHelper
   end
 
   def table_string_field(attribute, item)
-    (raw_content = item.send(attribute)).present? ? raw_content : mdash
+    field = (raw_content = item.try(attribute)).present? ? raw_content : mdash
+
+    if ["id", "name", "title"].include?(attribute.downcase)
+      link_to(field, controller: "/admin/#{item.class.to_resource}", action: "show", id: item.id)
+    else
+      field
+    end
   end
 
   alias_method :table_decimal_field, :table_string_field
