@@ -36,6 +36,10 @@ module Admin::Resources::DataTypes::HasManyHelper
       html_options = set_modal_options_for(klass)
       html_options["url"] = "/#{klass.to_resource}/new?_popup=true"
 
+      if @item.present? && @item.try(:id)
+        html_options["url"] += "&item_id=#{@item.id}"
+      end
+
       link_to Typus::I18n.t("Add"), "##{html_options['data-controls-modal']}", html_options
     end
   end

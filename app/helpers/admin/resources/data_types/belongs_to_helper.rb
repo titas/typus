@@ -27,6 +27,9 @@ module Admin::Resources::DataTypes::BelongsToHelper
 
     attribute_id = "#{@resource.name.underscore}_#{attribute}_id".gsub("/", "_")
 
+    form_options = { :include_blank => false }
+    form_options[:selected] = params[:item_id] if params[:item_id]
+
     render "admin/templates/belongs_to",
            :attribute => attribute,
            :attribute_id => attribute_id,
@@ -36,7 +39,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
            :label_text => label_text.html_safe,
            :values => values,
            :html_options => html_options,
-           :options => { :include_blank => false }
+           :options => form_options
   end
 
   def table_belongs_to_field(attribute, item)
@@ -84,6 +87,10 @@ module Admin::Resources::DataTypes::BelongsToHelper
     html_options = set_modal_options_for(klass)
     html_options["data-controls-modal"] = "modal-from-dom-#{options[:attribute]}"
     html_options["url"] = "/#{klass.to_resource}/new?_popup=true"
+
+    if @item.present? && @item.try(:id)
+      html_options["url"] += "&item_id=#{@item.id}"
+    end
 
     link_to Typus::I18n.t("Add"), { :anchor => html_options['data-controls-modal'] }, html_options
   end
